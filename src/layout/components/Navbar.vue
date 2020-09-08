@@ -49,9 +49,12 @@
           <router-link to="/home">
             <el-dropdown-item>回到首页</el-dropdown-item>
           </router-link>
-          <!-- <el-dropdown-item @click.native="setting">
+          <!-- <right-panel> -->
+          <el-dropdown-item divided @click.native="settingFn">
             <span style="display:block;">系统设置</span>
-          </el-dropdown-item> -->
+          </el-dropdown-item>
+          <!-- </right-panel> -->
+
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出登录</span>
           </el-dropdown-item>
@@ -67,8 +70,13 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import Search from '@/components/UserHearderSearch'
 import Screenfull from '@/components/Screenfull'
+
+import RightPanel from '@/components/RightPanel'
+
 import { removeToken } from "@/utils/auth";
 import { mapGetters } from 'vuex'
+import { addClass, removeClass } from "@/utils";
+
 import db from "@/utils/localstorage";
 export default {
   components: {
@@ -76,6 +84,7 @@ export default {
     Breadcrumb,
     Search,
     Screenfull,
+    RightPanel
   },
   filters: {
     userAvatarFilter(name) {
@@ -91,12 +100,14 @@ export default {
       return map[status] || "";
     },
   },
+
   mounted() {
     this.loadMyMsgs();
     if (this.msgsRefresh) {
       this.msgsRefreshChange(true);
     }
   },
+
   data() {
     return {
       tableData: {
@@ -105,6 +116,7 @@ export default {
       },
       msgsRefresh: db.get('MSGS_REFRESH', false), // 消息是否自动刷新
       msgsRefreshTimer: null,
+      show: false
     }
   },
   computed: {
@@ -198,8 +210,8 @@ export default {
       });
     },
 
-    setting() {
-      this.$store.commit("setting/openSettingBar", true);
+    settingFn() {
+      this.$store.commit("settings/openSettingBar", true);
     },
   }
 }

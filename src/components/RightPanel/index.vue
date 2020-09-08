@@ -2,15 +2,8 @@
   <div ref="rightPanel" :class="{ show: show }" class="rightPanel-container">
     <div class="rightPanel-background" />
     <div class="rightPanel">
-      <div
-        class="handle-button"
-        :style="{ top: buttonTop + 'px', 'background-color': theme }"
-        @click="show = !show"
-      >
-        <i :class="show ? 'el-icon-close' : 'el-icon-setting'" />
-      </div>
       <div class="rightPanel-items">
-        <slot />
+        <slot name="set" />
       </div>
     </div>
   </div>
@@ -33,14 +26,18 @@ export default {
   },
   data() {
     return {
-      show: false
+      //show: this.$store.state.settings.settingBar.opened
     };
   },
   computed: {
-    theme() {
-      return this.$store.state.settings.theme;
+    // theme() {
+    //   return this.$store.state.settings.theme;
+    // },
+    show() {
+      return this.$store.state.settings.settingBar.opened
     }
   },
+
   watch: {
     show(value) {
       if (value && !this.clickNotClose) {
@@ -55,6 +52,7 @@ export default {
   },
   mounted() {
     this.insertToBody();
+    this.addEventClick()
   },
   beforeDestroy() {
     const elx = this.$refs.rightPanel;
@@ -67,8 +65,10 @@ export default {
     closeSidebar(evt) {
       const parent = evt.target.closest(".rightPanel");
       if (!parent) {
-        this.show = false;
+        this.$store.commit('settings/openSettingBar', false);
+        // removeClass(document.body, "showRightPanel");
         window.removeEventListener("click", this.closeSidebar);
+
       }
     },
     insertToBody() {

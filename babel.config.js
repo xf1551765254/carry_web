@@ -17,16 +17,16 @@ module.exports = {
   },
   "plugins": [
     // '@babel/plugin-syntax-dynamic-import'
-    [
-      // "import",
-      // {
-      //   "libraryName": "element-ui",
-      //   "styleLibraryName": "theme-chalk"
-      // },
-      //配置路由懒加载插件
-      ...prodPlugins,
-      "@babel/plugin-syntax-dynamic-import"
-      // "syntax-dynamic-import"
-    ]
+
+    // "import",
+    // {
+    //   "libraryName": "element-ui",
+    //   "styleLibraryName": "theme-chalk"
+    // },
+    //配置路由懒加载插件
+    ...prodPlugins,
+    "@babel/plugin-syntax-dynamic-import"
+    // "syntax-dynamic-import"
+
   ]
 }

@@ -1,19 +1,23 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <!-- <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" /> -->
+    <!-- <div v-if="sidebar.opened" class="drawer-bg" @click="handleClickOutside" /> -->
     <sidebar class="sidebar-container" />
-    <div class="main-container">
-      <div class="fixed-header">
+    <div class="main-container" :class="{hasTagsView:needTagsView}">
+      <div :class="{'fixed-header':fixedHeader}">
         <navbar />
-        <tags-view />
+        <tags-view v-if="needTagsView" />
       </div>
       <!-- 坑 -->
       <app-main />
+      <right-panel v-if="showSettings">
+        <settings slot="set" />
+      </right-panel>
     </div>
   </div>
 </template>
 
 <script>
+import RightPanel from '@/components/RightPanel'
 import { AppMain, Navbar, Sidebar, TagsView, Settings } from './components'
 import { mapState } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
@@ -24,14 +28,16 @@ export default {
     Navbar,
     Sidebar,
     TagsView,
+    RightPanel,
+    Settings,
   },
   mixins: [ResizeMixin],
   computed: {
     ...mapState({
-      sidebar: state => state.app.sidebar
-      // showSettings: state => state.settings.showSettings,
-      // needTagsView: state => state.settings.tagsView,
-      // fixedHeader: state => state.settings.fixedHeader
+      sidebar: state => state.app.sidebar,
+      showSettings: state => state.settings.showSettings,
+      needTagsView: state => state.settings.tagsView,
+      fixedHeader: state => state.settings.fixedHeader
     }),
     classObj() {
       return {

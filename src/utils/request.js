@@ -10,7 +10,7 @@ import {
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  //baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: 'api',
   timeout: 5000
 })
@@ -21,6 +21,9 @@ service.interceptors.request.use(
     if (store.getters.token) {
       config.headers['X-Token'] = getToken()
     }
+    const clientId = process.env.VUE_APP_CLIENT_ID;
+    const clientSecret = process.env.VUE_APP_CLIENT_SECRET;
+    config.headers['Authorization'] = `Basic ${Base64.encode(`${clientId}:${clientSecret}`)}`;
     return config
   },
   error => {
@@ -87,9 +90,9 @@ service.interceptors.response.use(
           })
           break
         default:
-          if (errorMessage) {
+          if (error.Message) {
             Message({
-              message: errorMessage,
+              message: error.Message,
               type: 'error',
               duration: 5 * 1000
             })
@@ -97,11 +100,6 @@ service.interceptors.response.use(
           break
       }
     }
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
     return Promise.reject(error)
   }
 )

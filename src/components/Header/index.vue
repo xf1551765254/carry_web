@@ -52,12 +52,12 @@
         <i class="el-icon-message-solid"></i>
       </el-button>
       <!-- 注册 -->
-      <el-button type="text" v-if="!userToken">
+      <!-- <el-button type="text" v-if="!userToken">
         <i class="el-icon-edit"></i>
         <router-link to="/register">注册</router-link>
-      </el-button>
+      </el-button> -->
       <!-- 个人中心 -->
-      <el-dropdown class="el-dropdown" trigger="click" placement="bottom" v-else>
+      <el-dropdown class="el-dropdown" trigger="click" placement="bottom" v-if="userToken">
         <div class="el-dropdown-link">
           <div class="imgBox">
             <img src="@/assets/touxaing.jpeg">
