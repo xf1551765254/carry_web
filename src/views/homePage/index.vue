@@ -70,7 +70,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="contain-purchase">
+        <div class="contain-purchase" v-if="provideRoleIn">
           <el-row class="contain-hd purchase" type="flex" align="middle" justify="space-between">
             <el-col class="contain-title">
               <h5>采购中心</h5>
@@ -376,6 +376,11 @@ export default {
       ],
     }
   },
+  computed: {
+    provideRoleIn() {
+      return this.$store.state.user.roles.indexOf('provide') != -1
+    }
+  },
   methods: {
     mouseEnter(e, type) {
       console.log('over', e, type)
@@ -404,11 +409,11 @@ export default {
     },
     // 行业点击
     selectTitle(index) {
-      //console.log(index)
       this.industryTitleIndex = index
       if (index === 0) {
         this.listCard = [...this.listTrens]
         this.isIndustry = false
+
       } else if (index === 1) {
         this.listCard = [...this.listLaws]
         this.isIndustry = false

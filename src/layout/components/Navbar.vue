@@ -74,10 +74,9 @@ import Screenfull from '@/components/Screenfull'
 import RightPanel from '@/components/RightPanel'
 
 import { removeToken } from "@/utils/auth";
+import db from "@/utils/localstorage";
 import { mapGetters } from 'vuex'
 import { addClass, removeClass } from "@/utils";
-
-import db from "@/utils/localstorage";
 export default {
   components: {
     Hamburger,
@@ -156,6 +155,7 @@ export default {
     },
     async logout() {
       removeToken()
+      db.clear()
       //this.userToken = ''
       // await this.$store.dispatch('user/logout')
       // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
@@ -189,6 +189,7 @@ export default {
         this.msgsRefreshTimer = null;
       }
     },
+
     mark(ids, callback) {
       // msgsApi.mark({msgCenterIds: ids}).then(response => {
       //   const res = response.data;

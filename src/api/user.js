@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from './AxiosApi'
 
 export function login(data) {
   return request({
@@ -12,7 +12,9 @@ export function getInfo(token) {
   return request({
     url: '/vue-element-admin/user/info',
     method: 'get',
-    params: { token }
+    params: {
+      token
+    }
   })
 }
 

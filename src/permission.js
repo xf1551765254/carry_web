@@ -23,11 +23,15 @@ router.beforeEach(async (to, from, next) => {
 
   const hasToken = getToken()
 
+  // const hasRoles = store.getters.roles && store.getters.roles.length > 0
   if (!store.state.user.userId) {
     store.commit('user/SET_USERID', '1234567890')
+
     if (hasToken) {
       // 登录
       try {
+        // such as: ['admin'] or ,['developer','editor']
+        // const { roles } = await store.dispatch('user/getInfo')
         const accessRoutes = await store.dispatch('permission/generateRoutes', ['admin'])
         router.addRoutes(accessRoutes)
         next({

@@ -12,7 +12,6 @@
           <el-menu-item index="/home/consult/industry">行业动态</el-menu-item>
           <el-menu-item index="/home/consult/policy">政策法规</el-menu-item>
           <el-menu-item index="/home/consult/price">价格趋势</el-menu-item>
-          <!-- <el-menu-item index="/home/consult/pipeFitting">铸管/馆件</el-menu-item> -->
         </el-submenu>
         <el-submenu index="4">
           <template slot="title">知识库</template>
@@ -21,7 +20,7 @@
           <el-menu-item index="/home/knowledge/issue">常见问题</el-menu-item>
           <el-menu-item index="/home/knowledge/expert">专家专栏</el-menu-item>
         </el-submenu>
-        <el-submenu index="5">
+        <el-submenu index="5" v-if="roles.indexOf('provide')!=-1">
           <template slot="title">采购需求</template>
           <el-menu-item index="/home/purchase/demand">需求列表</el-menu-item>
           <el-menu-item index="/home/purchase/bidWinner">中标公示</el-menu-item>
@@ -29,6 +28,7 @@
         <el-menu-item index="/home/companyIntroduction">公司介绍</el-menu-item>
         <el-menu-item index="/home/partner">
           合作伙伴</el-menu-item>
+
       </el-menu>
     </div>
     <div class="header_right">
@@ -83,45 +83,30 @@
 import store from "@/store";
 import router from "@/router";
 import { getToken, removeToken } from "@/utils/auth";
+
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Header",
   data() {
     const active_Index = this.$route.path
     return {
       activeIndex: active_Index,
-      workMenulist: [
-        {
-          id: '1',
-          authName: '铸管/管件',
-          path: '/tube',
-          children: [
-            { id: '1-1', authName: '三通', path: '/threeLinks' },
-            {
-              id: '1-2', authName: "四通", path: '/stone',
-              children: [
-                { id: '1-2-1', authName: "全插三通", path: '/qThreeLinks' },
-                { id: '1-2-2', authName: "支撑", path: '/support' }]
-            }]
-        },
-        {
-          id: '2',
-          authName: '钢材',
-          path: '/stell',
-          children: [
-            { id: '2-1', authName: '盘查', path: '/question' },
-            { id: '2-2', authName: "铸铁", path: '/iron' }
-          ]
-        },
-        { id: '3', authName: '钢板', path: '/steel' }
-      ],
       input: '产品',
       select: '产品',
-      userToken: '',
+      userToken: ''
     };
   },
   mounted() {
-    console.log(this.$route.path)
     this.userToken = getToken()
+  },
+  computed: {
+    ...mapGetters([
+      'token',
+      'roles',
+      'avatar'
+    ])
+
   },
   methods: {
     handleSelect() { },

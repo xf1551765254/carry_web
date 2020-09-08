@@ -1,26 +1,29 @@
 const db = {
-  save (key, value) {
-    // if (value) {
+  save(key, value) {
     let projectName = process.env.VUE_APP_PROJECT_NAME
     localStorage.setItem(projectName + "_" + key, JSON.stringify(value))
-    // } else {
-    //   console.log("set 出错： key=" + key + ',value=' + value)
-    // }
-
   },
-  get (key, defaultValue = {}) {
+  get(key, defaultValue = {}) {
     let projectName = process.env.VUE_APP_PROJECT_NAME
+    const isExist = JSON.parse(localStorage.getItem(projectName + "_" + key))
     try {
-      return JSON.parse(localStorage.getItem(projectName + "_" + key)) || defaultValue
+      let localVal;
+      if (isExist == null) {
+        localVal = defaultValue
+      } else {
+        localVal = JSON.parse(localStorage.getItem(projectName + "_" + key))
+      }
+      return localVal
+
     } catch (err) {
       return defaultValue
     }
   },
-  remove (key) {
+  remove(key) {
     let projectName = process.env.VUE_APP_PROJECT_NAME
     localStorage.removeItem(projectName + "_" + key)
   },
-  clear () {
+  clear() {
     // localStorage.clear()
 
     let projectName = process.env.VUE_APP_PROJECT_NAME

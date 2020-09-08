@@ -43,6 +43,7 @@ export default {
       set(val) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'fixedHeader',
+          key_db: 'FIX_HEADER',
           value: val
         })
       }
@@ -54,6 +55,7 @@ export default {
       set(val) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'tagsView',
+          key_db: 'TAGS_VIEW',
           value: val
         })
       }
@@ -65,6 +67,7 @@ export default {
       set(val) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'sidebarLogo',
+          key_db: 'SIDEBAR_LOGO',
           value: val
         })
       }
@@ -74,6 +77,7 @@ export default {
     themeChange(val) {
       this.$store.dispatch('settings/changeSetting', {
         key: 'theme',
+        key_db: 'Theme',
         value: val
       })
     }
@@ -90,19 +94,19 @@ export default {
 
   .drawer-title {
     margin-bottom: 12px;
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, 0.85);
     font-size: 14px;
     line-height: 22px;
   }
 
   .drawer-item {
-    color: rgba(0, 0, 0, .65);
+    color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
     padding: 12px 0;
   }
 
   .drawer-switch {
-    float: right
+    float: right;
   }
 }
 </style>

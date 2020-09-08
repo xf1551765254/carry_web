@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie' // 登录功能
 
-const userToken = 'shopping-ui'
+const userToken = 'XinXing-user'
 export function getToken() {
   return Cookies.get(userToken)
 }

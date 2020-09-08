@@ -1,4 +1,5 @@
-import request from '@/utils/request'
+// import request from '@/utils/request'
+import request from './AxiosApi'
 
 export function fetchList(query) {
   return request({
@@ -12,7 +13,9 @@ export function fetchArticle(id) {
   return request({
     url: '/vue-element-admin/article/detail',
     method: 'get',
-    params: { id }
+    params: {
+      id
+    }
   })
 }
 
@@ -20,7 +23,9 @@ export function fetchPv(pv) {
   return request({
     url: '/vue-element-admin/article/pv',
     method: 'get',
-    params: { pv }
+    params: {
+      pv
+    }
   })
 }
 

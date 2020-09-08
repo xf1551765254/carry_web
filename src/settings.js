@@ -1,7 +1,6 @@
 module.exports = {
   title: '新兴铸管',
 
-
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel

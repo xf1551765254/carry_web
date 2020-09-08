@@ -1,10 +1,12 @@
-import request from '@/utils/request'
+import request from './AxiosApi'
 
 export function searchUser(name) {
   return request({
     url: '/vue-element-admin/search/user',
     method: 'get',
-    params: { name }
+    params: {
+      name
+    }
   })
 }
 

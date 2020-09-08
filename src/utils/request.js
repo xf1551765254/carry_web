@@ -65,41 +65,11 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    if (error.message) {
-      const errorMessage = error.response.data === null ? '系统内部异常，请联系网站管理员' : error.response.data.message
-      switch (error.response.status) {
-        case 404:
-          Message({
-            message: '很抱歉，资源未找到' || 'Error',
-            type: 'error',
-            duration: 5 * 1000
-          })
-          break
-        case 403:
-          Message({
-            message: '很抱歉，您暂无该操作权限' || 'Error',
-            type: 'error',
-            duration: 5 * 1000
-          })
-          break
-        case 401:
-          Message({
-            message: '很抱歉，认证已失效，请重新登录' || 'Error',
-            type: 'error',
-            duration: 5 * 1000
-          })
-          break
-        default:
-          if (error.Message) {
-            Message({
-              message: error.Message,
-              type: 'error',
-              duration: 5 * 1000
-            })
-          }
-          break
-      }
-    }
+    Message({
+      message: error.message,
+      type: 'error',
+      duration: 5 * 1000
+    })
     return Promise.reject(error)
   }
 )
