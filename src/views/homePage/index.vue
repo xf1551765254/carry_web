@@ -578,8 +578,6 @@ li {
           background-color: #fff;
           padding: 10px;
           width: calc((100% - 10px) / 2);
-          .video-details {
-          }
         }
       }
       .contain-bd.purchase {
@@ -592,9 +590,7 @@ li {
             text-overflow: ellipsis;
           }
           .card-list {
-            padding: 10px 20px;
-            height: 45px;
-            line-height: 25px;
+            padding: 13px 20px;
             border-bottom: 1px solid #e6ebf5;
             font-size: 14px;
             color: #999;
@@ -633,12 +629,14 @@ li {
             font-size: 14px;
             color: #666;
             line-height: 1.2;
+            box-sizing: border-box;
           }
           .newGoods-footer {
             width: 100%;
             padding: 20px;
             height: 60px;
             line-height: 1.2;
+            box-sizing: border-box;
             & > div {
               float: left;
               color: #999;
