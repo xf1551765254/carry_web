@@ -102,6 +102,7 @@ export default {
   border-bottom: 1px solid #ccc;
   background-color: #fff;
   padding: 15px 10px;
+  box-sizing: border-box;
   .imgBox {
     width: 159px;
     height: 115px;
